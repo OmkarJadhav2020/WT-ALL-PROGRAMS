@@ -1,4 +1,3 @@
-
 public class MulltiThreading {
     public static void main(String[] args) {
         Mythred thread1 = new Mythred();
