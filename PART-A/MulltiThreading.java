@@ -1,13 +1,13 @@
 public class MulltiThreading {
     public static void main(String[] args) {
-        Mythred thread1 = new Mythred();
-        Mythred thread2 = new Mythred();
+        Mythread thread1 = new Mythread();
+        Mythread thread2 = new Mythread();
         thread1.start();
         thread2.start();
     }
 }
 
-public class Mythred extends Thread
+public class Mythread extends Thread
 {
     public void run()
     {
