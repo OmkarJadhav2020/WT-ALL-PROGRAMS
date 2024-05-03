@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Handling and Calendar</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+    label {
+        font-weight: bold;
+    }
+    select, input[type="number"] {
+        padding: 8px;
+        margin: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 150px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .calender {
+        display: none;
+        margin-top: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #007bff;
+        color: #fff;
+    }
+    td {
+        background-color: #f9f9f9;
+    }
+    .openBtn
+    {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    .changeColorBtn {
+        position: absolute;
+        top: 20px;
+        right: 200px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <label for="month">Month: </label>
+    <select id="month">
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+    </select>
+    <label for="year">Year: </label>
+    <input type="number" id="year" min="1900" max="2100" value="2024">
+    <button onclick="genCal()">Generate Calendar</button>
+    <div id="calender" class="calender"></div>
+    <button class="openBtn" onclick="openNewWindow()">Open new window</button>
+    <button class="changeColorBtn" onclick="changeColor()">Change background color</button>
+</div>
+
+<script>
+    const colors = ['#007bff', '#28a745', '#dc3545', '#ffc107', '#17a2b8'];
+    let idx = Math.floor(Math.random() * colors.length);
+    document.body.style.backgroundColor = colors[idx];
+
+    function genCal() {
+        let monthIndex = document.getElementById("month").value;
+        let year = document.getElementById("year").value;
+        let date_ = new Date(year, monthIndex, 1);
+        let daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+        let firstDay = date_.getDay();
+        let calendar = "<table><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr><tr>";
+        for (let i = 0; i < firstDay; i++) {
+            calendar += "<td></td>";
+        }
+        for (let i = 1; i <= daysInMonth; i++) {
+            if (date_.getDay() == 0) {
+                calendar += "<tr>";
+            }
+            calendar += "<td>" + i + "</td>";
+            if (date_.getDay() == 6) {
+                calendar += "</tr>";
+            }
+            date_.setDate(date_.getDate() + 1);
+        }
+        document.getElementById("calender").innerHTML = calendar;
+        document.getElementById("calender").style.display = 'block';
+    }
+    function openNewWindow() {
+        let url = "https://www.pokemon.com";
+        let options = "width=450,height=600,top=100,left=100";
+        window.open(url, "_blank", options);
+    }
+    function changeColor() {
+        let color = prompt("Enter color (e.g., #RRGGBB or a color name):");
+        if (color) {
+            document.body.style.backgroundColor = color;
+        }
+    }
+</script>
+
+</body>
+</html>
