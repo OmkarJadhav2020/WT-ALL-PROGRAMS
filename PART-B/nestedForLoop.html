@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loop Example</title>
+</head>
+<style>
+    table td
+    {
+        padding: 20px;
+    }
+</style>
+<body>
+    <div class="container" id = "container">
+        
+    </div>
+</body>
+<script>
+    let table = "<table border=2>"
+    for(let i = 0 ; i < 10;i++)
+    {
+        table+="<tr>"
+        for(let j = 0 ;j < 10 ; j++)
+        {
+            table+=`<td>(${i},${j})</td>`
+        }
+        table+="</tr>"
+    }
+    table+="</table>"
+    document.getElementById("container").innerHTML = table;
+</script>
+</html>
